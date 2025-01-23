@@ -38,73 +38,73 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
 // Обработка отправки формы
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
 
     // Индикатор загрузки, пока отрабатывает моковый запрос
-    const loadingIndicator = document.getElementById("loading");
-    loadingIndicator.style.display = "block";
+    const loadingIndicator = document.getElementById('loading')
+    loadingIndicator.style.display = 'block'
 
     // Сброс ошибок
-    const errorMessages = form.querySelectorAll(".error-message");
-    errorMessages.forEach((el) => (el.textContent = ""));
-    responseMessage.textContent = "";
-    responseMessage.classList.remove("error-message", "success-message");
+    const errorMessages = form.querySelectorAll('.error-message')
+    errorMessages.forEach((el) => (el.textContent = ''))
+    responseMessage.textContent = ''
+    responseMessage.classList.remove('error-message', 'success-message')
 
     // Валидация
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    const validationErrors = validateForm(data);
+    const formData = new FormData(form)
+    const data = Object.fromEntries(formData.entries())
+    const validationErrors = validateForm(data)
 
     // Обработка ошибок валидации
     if (Object.keys(validationErrors).length > 0) {
       setTimeout(() => {
-        loadingIndicator.style.display = "none";
-        responseMessage.textContent = "Исправьте ошибки в форме.";
-        responseMessage.classList.add("error-message");
+        loadingIndicator.style.display = 'none'
+        responseMessage.textContent = 'Исправьте ошибки в форме.'
+        responseMessage.classList.add('error-message')
         for (const [field, message] of Object.entries(validationErrors)) {
-          const errorElement = form.querySelector(`#${field} ~ .error-message`);
-          const inputField = form[field];
+          const errorElement = form.querySelector(`#${field} ~ .error-message`)
+          const inputField = form[field]
           if (errorElement) {
-            errorElement.textContent = message;
-            inputField.classList.add("error");
+            errorElement.textContent = message
+            inputField.classList.add('error')
           }
         }
-      }, 1000);
-      return;
+      }, 1000)
+      return
     }
 
     // Отправка данных
-    const response = await sendFormData(data);
-    responseMessage.classList.remove("error-message", "success-message");
+    const response = await sendFormData(data)
+    responseMessage.classList.remove('error-message', 'success-message')
 
-    if (response.status === "error") {
+    if (response.status === 'error') {
       setTimeout(() => {
-        loadingIndicator.style.display = "none";
-        responseMessage.classList.add("error-message");
-        responseMessage.textContent = "Ошибка на сервере.";
+        loadingIndicator.style.display = 'none'
+        responseMessage.classList.add('error-message')
+        responseMessage.textContent = 'Ошибка на сервере.'
         for (const [field, message] of Object.entries(response.fields)) {
-          const errorElement = form.querySelector(`#${field} ~ .error-message`);
+          const errorElement = form.querySelector(`#${field} ~ .error-message`)
           if (errorElement) {
-            errorElement.textContent = message;
-            form[field].classList.add("error");
+            errorElement.textContent = message
+            form[field].classList.add('error')
           }
         }
-      }, 1000);
+      }, 1000)
     } else {
-      loadingIndicator.style.display = "none";
-      responseMessage.classList.remove("error-message");
-      responseMessage.classList.add("success-message");
-      responseMessage.textContent = response.msg;
-      form.reset();
+      loadingIndicator.style.display = 'none'
+      responseMessage.classList.remove('error-message')
+      responseMessage.classList.add('success-message')
+      responseMessage.textContent = response.msg
+      form.reset()
 
       // Сброс стилей ошибок
-      const inputFields = form.querySelectorAll("input, textarea");
+      const inputFields = form.querySelectorAll('input, textarea')
       inputFields.forEach((inputField) => {
-        inputField.classList.remove("error");
-      });
+        inputField.classList.remove('error')
+      })
     }
-  });
+  })
 
   // Модальное окно
   openModalBtn.addEventListener('click', () => {

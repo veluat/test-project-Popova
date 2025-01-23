@@ -1,21 +1,21 @@
-import { validateForm } from './validation.js';
+import {validateForm} from './validation.js'
 
 export async function sendFormData(data) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const errors = validateForm(data);
+      const errors = validateForm(data)
 
       if (Object.keys(errors).length > 0) {
         resolve({
-          status: "error",
+          status: 'error',
           fields: errors,
-        });
+        })
       } else {
         resolve({
-          status: "success",
-          msg: "Ваша заявка успешно отправлена",
-        });
+          status: 'success',
+          msg: 'Ваша заявка успешно отправлена',
+        })
       }
-    }, 1000);
-  });
+    }, 1000)
+  })
 }
