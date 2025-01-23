@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Форма обратной связи</title>
+</head>
+<body>
+<div class="container">
+  <button id="open-modal-btn" aria-label="Открыть модальное окно">Открыть модальное окно</button>
+  <h1>Форма обратной связи</h1>
+  <form id="feedback-form" class="form-container" novalidate>
+    <div class="form-group">
+      <label for="name">Имя <span class="required">*</span></label>
+      <input type="text" id="name" name="name" required aria-required="true">
+      <div class="error-message" aria-live="assertive"></div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email <span class="required">*</span></label>
+      <input type="email" id="email" name="email" required aria-required="true">
+      <div class="error-message" aria-live="assertive"></div>
+    </div>
+    <div class="form-group">
+      <label for="phone">Телефон <span class="required">*</span></label>
+      <input type="text" id="phone" name="phone" placeholder="+375 (__) ___-__-__" required aria-required="true">
+      <div class="error-message" aria-live="assertive"></div>
+    </div>
+    <div class="form-group">
+      <label for="message">Сообщение <span class="required">*</span></label>
+      <textarea id="message" name="message" required aria-required="true"></textarea>
+      <div class="error-message" aria-live="assertive"></div>
+    </div>
+    <div id="loading" class="loading" style="display: none;"></div>
+    <div class="button-response-container">
+      <button type="submit">Отправить</button>
+      <div id="response-message" class="response-message"></div>
+    </div>
+    <p class="note">Поля, отмеченные звездочкой <span class="required">*</span>, обязательны для заполнения.</p>
+  </form>
+</div>
+
+<div id="modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description">
+  <div class="modal-content">
+    <span id="close-modal-btn" class="close-btn" role="button" aria-label="Закрыть модальное окно">&times;</span>
+    <p id="modal-title" class="center-text bold-text">Волшебное модальное окно!</p>
+    <p id="modal-description" class="center-text">Не судите поспешно, пригласите на собеседование &#128512;</p>
+    <div class="button-container">
+      <a href="https://hh.ru/resume/05f9aa01ff0c537ce80039ed1f394976447964" class="button-link" target="_blank"
+         rel="noopener noreferrer">Резюме на hh.ru</a>
+      <button id="close-modal" type="button">Закрыть</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
